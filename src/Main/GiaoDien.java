@@ -4,6 +4,8 @@
  */
 package Main;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Phuc Toan
@@ -66,6 +68,11 @@ public class GiaoDien extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.MatteBorder(null));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thập phân", "Nhị phân", "Thập lục phân" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Chuyển đổi từ");
@@ -78,6 +85,11 @@ public class GiaoDien extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Đổi");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cài lại");
 
@@ -204,6 +216,50 @@ public class GiaoDien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private String convertDemToHexString(int num) {
+        // For storing remainder
+        int rem;
+
+        // For storing result
+        String str2 = "";
+
+        // Digits in hexadecimal number system
+        char hex[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+        while (num > 0) {
+            rem = num % 16;
+            str2 = hex[rem] + str2;
+            num = num / 16;
+        }
+        return str2;
+    }
+
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String chuoiNhap = jTextArea1.getText();
+        String ketQua = "";
+        try {
+            int soNhapVao = Integer.parseInt(chuoiNhap);
+            
+            if("Thập phân".equals(jComboBox1.getSelectedItem()) && "Thập lục phân".equals(jComboBox2.getSelectedItem())){
+                ketQua = convertDemToHexString(soNhapVao);
+                jTextArea2.setText(ketQua);
+            }
+            
+            
+        } catch (Exception e) {
+            System.out.println("So nhap vao khong la so thap phan");
+            JOptionPane.showMessageDialog(rootPane,"So nhap vao khong la so thap phan");
+            jTextArea2.setText("");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
